@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ป๋องทอง ซีฟู้ด - ปลากระป๋องพรีเมียม สูตรต้นตำรับรสมือแม่</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c1121f;
+            --gold: #f4a261;
+            --gold-bright: #ffb703;
+            --navy: #023047;
+            --bg-cream: #fffbf2;
+        }
+        * { box-sizing: border-box; font-family: 'Sarabun', sans-serif; margin: 0; padding: 0; }
+        body { background-color: var(--bg-cream); color: #2b2d42; line-height: 1.6; }
+
+        header {
+            background: linear-gradient(90deg, var(--navy) 0%, #03537a 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .brand-header { display: flex; align-items: center; gap: 15px; }
+        .header-logo {
+            height: 60px;
+            width: auto;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .music-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.12);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid var(--gold-bright);
+        }
+        .music-btn {
+            background: var(--gold-bright);
+            color: var(--navy);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .music-btn:hover { background: #ffd166; transform: scale(1.03); }
+
+        .hero-section {
+            background: radial-gradient(circle at top right, #ffe5d9, #fffbf2 70%);
+            padding: 2.5rem 1.5rem;
+            border-bottom: 3px solid var(--gold);
+        }
+        .hero-container {
+            max-width: 1050px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .hero-logo-box { text-align: center; }
+        .hero-logo-img {
+            max-width: 100%;
+            width: 380px;
+            height: auto;
+            filter: drop-shadow(0 10px 18px rgba(0,0,0,0.15));
+            animation: floatLogo 3.5s ease-in-out infinite;
+        }
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .hero-tagline {
+            margin-top: 1rem;
+            font-size: 1.15rem;
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        .video-wrapper { display: flex; flex-direction: column; align-items: center; }
+        .video-frame {
+            width: 270px;
+            height: 480px;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 5px solid var(--navy);
+            box-shadow: 0 12px 28px rgba(2, 48, 71, 0.25);
+            background: #000;
+        }
+        .video-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-caption {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #555;
+            background: #fff;
+            padding: 4px 12px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .container { max-width: 1050px; margin: 2.5rem auto; padding: 0 1.5rem; }
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.2rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            border: 1px solid #f0e6d2;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .product-highlight {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px dashed var(--gold);
+        }
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+        }
+        h1 { font-size: 1.75rem; color: var(--navy); margin-bottom: 0.6rem; }
+        .price { font-size: 1.8rem; color: var(--primary); font-weight: 700; margin: 0.8rem 0; }
+        
+        .form-group { margin: 1rem 0; }
+        select, input[type="number"] { padding: 10px 12px; font-size: 1rem; border: 1.5px solid #ccc; border-radius: 8px; }
+        select { width: 100%; margin-top: 6px; background: #fff; }
+        .order-controls { display: flex; gap: 12px; align-items: center; margin-top: 1.2rem; }
+        input[type="number"] { width: 80px; text-align: center; font-weight: bold; }
+        .btn-order {
+            background: linear-gradient(135deg, var(--primary), #9b0e18);
+            color: white;
+            border: none;
+            padding: 13px 24px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            flex: 1;
+        }
+        .btn-order:hover { transform: translateY(-2px); }
+        .live-total { margin-top: 12px; font-size: 0.95rem; color: var(--navy); font-weight: 700; }
+
+        .ip-public-section {
+            margin-top: 2.5rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border-top: 5px solid var(--navy);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .ip-public-section h2 { color: var(--navy); font-size: 1.35rem; margin-bottom: 1.2rem; }
+        .ip-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+        .ip-card {
+            background: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            border-left: 4px solid var(--gold-bright);
+        }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); align-items: center; justify-content: center; z-index: 999; }
+        .modal-content { background: white; padding: 2rem; border-radius: 16px; max-width: 460px; width: 90%; text-align: center; animation: fadeIn 0.25s ease; }
+        @keyframes fadeIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .summary-box { background: #f1faee; padding: 1.2rem; border-radius: 10px; margin: 1rem 0; text-align: left; font-size: 0.95rem; border: 1px solid #cdeac0; }
+        .btn-close { background: var(--navy); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+
+        footer { text-align: center; padding: 2rem; color: #666; font-size: 0.85rem; margin-top: 2rem; border-top: 1px solid #e5dcc5; }
+
+        @media (max-width: 820px) {
+            .hero-container, .product-card, .ip-list { grid-template-columns: 1fr; }
+            .hero-logo-img { width: 290px; }
+        }
+
+        /* UX enhancements */
+        html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+        a { color: inherit; }
+        .main-nav { display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+        .main-nav a { color:#fff; text-decoration:none; font-size:.9rem; opacity:.92; transition:.2s; }
+        .main-nav a:hover { color:var(--gold-bright); transform:translateY(-2px); }
+        .header-actions { display:flex; align-items:center; }
+        .cart-pill { color:var(--navy); background:var(--gold-bright); padding:9px 13px; border-radius:24px; text-decoration:none; font-weight:700; white-space:nowrap; }
+        .cart-pill b { display:inline-grid; place-items:center; min-width:22px; height:22px; padding:0 5px; margin-left:4px; border-radius:50%; background:#fff; }
+        .benefit-strip { max-width:1050px; margin:22px auto 0; padding:0 20px; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+        .benefit-item { display:flex; align-items:center; gap:11px; background:#fff; border:1px solid #f0e2c8; border-radius:14px; padding:13px; box-shadow:0 5px 16px rgba(2,48,71,.05); }
+        .benefit-item>span { font-size:1.7rem; }
+        .benefit-item strong,.benefit-item small { display:block; }
+        .benefit-item strong { color:var(--navy); font-size:.92rem; }
+        .benefit-item small { color:#777; font-size:.78rem; }
+        .section-heading { text-align:center; margin:0 auto 24px; }
+        .section-heading h2 { color:var(--navy); font-size:1.7rem; margin:4px 0; }
+        .section-heading p { color:#6b7280; }
+        .eyebrow { color:#bd7a00; font-size:.75rem; letter-spacing:2px; font-weight:700; }
+        .product-card { transition:transform .25s, box-shadow .25s; }
+        .product-card:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(2,48,71,.10); }
+        .qty-stepper { display:flex; align-items:center; border:1px solid #d5dbe1; border-radius:9px; overflow:hidden; background:#fff; }
+        .qty-stepper button { width:34px; height:42px; border:0; background:#edf4f7; color:var(--navy); font-size:1.25rem; cursor:pointer; }
+        .qty-stepper button:hover { background:#dcecf2; }
+        .qty-stepper input { border:0; border-radius:0; width:48px; height:42px; padding:5px; }
+        .shipping-progress { margin-top:12px; padding:10px 13px; background:#fff7df; color:#805600; border-radius:9px; font-size:.9rem; font-weight:600; }
+        .secure-note { margin-top:7px; color:#68737d; font-size:.8rem; }
+        .faq-section { max-width:900px; margin:55px auto; padding:0 22px; }
+        .faq-list { display:grid; gap:10px; }
+        .faq-list details { background:#fff; border:1px solid #eadfc9; border-radius:12px; padding:15px 18px; }
+        .faq-list summary { cursor:pointer; color:var(--navy); font-weight:700; }
+        .faq-list details p { padding-top:10px; color:#5d6670; }
+        footer { background:linear-gradient(110deg,#022b43,#064d70); color:#fff; border:0; margin-top:55px; }
+        footer p { color:#e5edf2; margin:4px 0 15px; }
+        footer small { display:block; color:#cbd8df; margin-top:18px; }
+        .footer-brand { color:var(--gold-bright); font-size:1.35rem; font-weight:700; }
+        .creators { display:inline-flex; flex-direction:column; gap:3px; text-align:left; padding:12px 22px; border:1px solid rgba(255,255,255,.25); border-radius:12px; background:rgba(255,255,255,.07); }
+        .creators strong { color:var(--gold-bright); }
+        .back-to-top { position:fixed; right:20px; bottom:20px; width:44px; height:44px; border:0; border-radius:50%; background:var(--gold-bright); color:var(--navy); font-size:1.4rem; font-weight:700; box-shadow:0 5px 15px #0003; cursor:pointer; display:none; z-index:90; }
+        .back-to-top.show { display:block; animation:fadeIn .2s ease; }
+        .btn-order { box-shadow:0 5px 12px rgba(193,18,31,.2); }
+        .btn-order:active,.music-btn:active { transform:scale(.98); }
+        @media(max-width:900px) {
+            header { padding:12px 16px; }
+            .main-nav { order:3; width:100%; justify-content:center; gap:14px; }
+            .benefit-strip { grid-template-columns:repeat(2,1fr); }
+        }
+        @media(max-width:560px) {
+            .main-nav { gap:10px; }
+            .main-nav a { font-size:.78rem; }
+            .header-actions { margin-left:auto; }
+            .cart-pill span { display:none; }
+            .benefit-strip { grid-template-columns:1fr 1fr; padding:0 12px; gap:8px; }
+            .benefit-item { padding:10px 8px; gap:7px; }
+            .benefit-item strong { font-size:.78rem; }
+            .benefit-item small { font-size:.68rem; }
+            .order-controls { flex-wrap:wrap; }
+            .btn-order { flex-basis:100%; }
+            .section-heading h2 { font-size:1.35rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="brand-header">
+        <img src="logo-new.png" class="header-logo" alt="ป๋องทอง">
+        <div>
+            <strong style="font-size: 1.15rem; color: var(--gold-bright);">ป๋องทอง ซีฟู้ด (PongThong Seafood)</strong>
+            <div style="font-size: 0.85rem; opacity: 0.9;">ปลากระป๋องพรีเมียม สูตรต้นตำรับรสมือแม่</div>
+        </div>
+    </div>
+    <nav class="main-nav" aria-label="เมนูหลัก">
+        <a href="#home">หน้าแรก</a>
+        <a href="#product">สินค้า</a>
+        <a href="#why-us">จุดเด่น</a>
+        <a href="#faq">คำถามที่พบบ่อย</a>
+    </nav>
+    <div class="header-actions">
+        <a class="cart-pill" href="#product" aria-label="ไปยังสินค้า">🛒 <span>เลือกซื้อสินค้า</span> <b id="cartCount">0</b></a>
+    </div>
+
+    <div class="music-control">
+        <span style="font-size: 0.85rem;">🎵 เพลงป๋องทอง:</span>
+        <button id="musicToggleBtn" class="music-btn">▶ เปิดเพลงประกอบ</button>
+    </div>
+</header>
+
+<!-- ไฟล์เพลงประกอบเรียกตรงจากโฟลเดอร์เดียวกัน -->
+<audio id="brandAudio" src="music.mp3.mp3" loop preload="auto"></audio>
+
+<section class="hero-section" id="home">
+    <div class="hero-container">
+        <div class="hero-logo-box">
+            <img src="logo-new.png" class="hero-logo-img" alt="ตราป๋องทอง ซีฟู้ด">
+            <div class="hero-tagline">
+                "อร่อย สะดวก คุณภาพพรีเมียม — เปิดเมื่อไรก็อร่อย!"
+            </div>
+            <p style="font-size: 0.95rem; color: #555; margin-top: 0.5rem;">
+                คัดสรรปลาซาร์ดีนตัวโตเต็มคำ เคี่ยวในซอสมะเขือเทศเข้มข้นถึงใจ<br>
+                เหมือนแม่มาทำให้กินทุกมื้อ
+            </p>
+        </div>
+
+        <div class="video-wrapper">
+            <div class="video-frame">
+                <!-- วิดีโอประกอบเล่นวนอัตโนมัติ (ปิดเสียงวิดีโอไว้เพื่อไม่ให้ตีกับเพลงประกอบ) -->
+                <video src="video.mp4.mp4" controls playsinline preload="metadata"></video>
+            </div>
+            <div class="video-caption">🎬 วิดีโอแนะนำความอร่อย</div>
+        </div>
+    </div>
+</section>
+
+<section class="benefit-strip" id="why-us">
+    <div class="benefit-item"><span>🐟</span><div><strong>คัดปลาซาร์ดีนพิเศษ</strong><small>เนื้อแน่น เต็มคำ</small></div></div>
+    <div class="benefit-item"><span>🍅</span><div><strong>ซอสเข้มข้น</strong><small>สูตรต้นตำรับรสมือแม่</small></div></div>
+    <div class="benefit-item"><span>📦</span><div><strong>ส่งฟรีเมื่อซื้อ 3 แพ็ก</strong><small>คุ้มยิ่งขึ้นเมื่อซื้อยกชุด</small></div></div>
+    <div class="benefit-item"><span>🔒</span><div><strong>สั่งซื้อง่าย</strong><small>สรุปรายการก่อนยืนยัน</small></div></div>
+</section>
+
+<div class="container" id="product">
+    <div class="section-heading">
+        <span class="eyebrow">PONGTHONG BEST SELLER</span>
+        <h2>เลือกความอร่อยที่ใช่สำหรับคุณ</h2>
+        <p>อร่อยง่าย ๆ ได้ทุกมื้อ กับปลากระป๋องคุณภาพพรีเมียม</p>
+    </div>
+    <div class="product-card">
+        <div class="product-highlight">
+            <img src="logo-new.png" style="width: 220px; height: auto; margin-bottom: 10px;" alt="สินค้าป๋องทอง">
+            <div style="font-weight: 700; color: var(--navy);">แพ็กสุดคุ้ม 4 กระป๋อง</div>
+            <div style="font-size: 0.85rem; color: #555;">น้ำหนักสุทธิ 155 กรัม / กระป๋อง</div>
+        </div>
+
+        <div>
+            <span class="badge">🔥 สินค้าขายดีอันดับ 1</span>
+            <h1>ปลากระป๋องป๋องทอง คัดไซส์พิเศษ (แพ็ก 4 กระป๋อง)</h1>
+            <p>เนื้อปลาซาร์ดีนแน่นเต็มคำ ไม่คาว มาพร้อมนวัตกรรมฝาดึงเปิดง่าย (Easy Open Lid) ปลอดภัย ไม่บาดมือ</p>
+
+            <div class="form-group">
+                <label for="flavorSelect"><strong>เลือกรสชาติความอร่อย:</strong></label>
+                <select id="flavorSelect">
+                    <option value="tomato">สูตรซอสมะเขือเทศเข้มข้น (119 บาท/แพ็ก)</option>
+                    <option value="chili">สูตรซอสมะเขือเทศพริกขี้หนูสวน (129 บาท/แพ็ก)</option>
+                </select>
+            </div>
+
+            <div class="price" id="displayPrice">฿119 / แพ็ก</div>
+
+            <div class="order-controls">
+                <label for="qty">จำนวน:</label>
+                <div class="qty-stepper">
+                    <button type="button" id="qtyMinus" aria-label="ลดจำนวน">−</button>
+                    <input type="number" id="qty" value="1" min="1" max="50" inputmode="numeric">
+                    <button type="button" id="qtyPlus" aria-label="เพิ่มจำนวน">+</button>
+                </div>
+                <button id="orderBtn" class="btn-order">🛒 สั่งซื้อเลย</button>
+            </div>
+            <div class="shipping-progress" id="shippingProgress">เพิ่มอีก 2 แพ็ก เพื่อรับสิทธิ์ส่งฟรี 🎁</div>
+            <p class="secure-note">🔐 นี่คือระบบสาธิตการสั่งซื้อ ไม่มีการเรียกเก็บเงินจริง</p>
+            <div class="live-total" id="liveTotalText">ยอดประเมินเบื้องต้น: 154 บาท (รวมค่าส่ง 35 บาท)</div>
+        </div>
+    </div>
+
+    <div class="ip-public-section">
+        <h2>🛡️ ความมั่นใจและทรัพย์สินทางปัญญาของแบรนด์ "ป๋องทอง"</h2>
+        <div class="ip-list">
+            <div class="ip-card">
+                <strong>เครื่องหมายการค้า "ป๋องทอง"</strong><br>
+                สัญลักษณ์ปลาซาร์ดีนสวมมงกุฎทองและตัวอักษร "ป๋องทอง PongThong Seafood" เพื่อรับรองสินค้าของแท้จากโรงงานของเรา
+            </div>
+            <div class="ip-card">
+                <strong>นวัตกรรมฝาดึงเปิดง่าย</strong><br>
+                กลไกฝาดึงลดแรงต้าน เปิดสะดวกและปลอดภัย (อยู่ระหว่างขั้นตอนการสืบค้นเพื่อยื่นขออนุสิทธิบัตร)
+            </div>
+            <div class="ip-card">
+                <strong>ลิขสิทธิ์สื่อโฆษณาและเพลง</strong><br>
+                โลโก้ วิดีโอโฆษณา และเพลงประจำแบรนด์ "ป๋องทอง" ได้รับความคุ้มครองตามกฎหมายลิขสิทธิ์ สงวนสิทธิ์ห้ามลอกเลียนแบบ
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="orderModal">
+    <div class="modal-content">
+        <h2 style="color: var(--primary);">✅ สรุปรายการทดลองสั่งซื้อ</h2>
+        <p style="font-size: 0.9rem; color: #666;">(ระบบจำลองการสั่งซื้อสำหรับทดสอบเว็บไซต์)</p>
+        <div class="summary-box" id="summaryDetails"></div>
+        <button id="closeModalBtn" class="btn-close">ปิดหน้าต่าง</button>
+    </div>
+</div>
+
+<section class="faq-section" id="faq">
+    <div class="section-heading">
+        <span class="eyebrow">HELP CENTER</span>
+        <h2>คำถามที่พบบ่อย</h2>
+        <p>ข้อมูลเบื้องต้นก่อนเลือกซื้อป๋องทอง</p>
+    </div>
+    <div class="faq-list">
+        <details><summary>หนึ่งแพ็กมีทั้งหมดกี่กระป๋อง?</summary><p>หนึ่งแพ็กประกอบด้วยปลากระป๋อง 4 กระป๋อง ขนาด 155 กรัมต่อกระป๋อง</p></details>
+        <details><summary>มีรสชาติอะไรให้เลือกบ้าง?</summary><p>มี 2 สูตร ได้แก่ ซอสมะเขือเทศเข้มข้น และซอสมะเขือเทศพริกขี้หนูสวน</p></details>
+        <details><summary>ซื้อเท่าไรจึงจะได้รับสิทธิ์จัดส่งฟรี?</summary><p>เมื่อสั่งซื้อครบ 3 แพ็กขึ้นไป ระบบจะคำนวณค่าจัดส่งเป็น 0 บาท</p></details>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-brand">👑 ป๋องทอง ซีฟู้ด</div>
+    <p>อร่อย สะดวก คุณภาพพรีเมียม — เปิดเมื่อไรก็อร่อย!</p>
+    <div class="creators">
+        <strong>ผู้จัดทำ</strong>
+        <span>1. Kriangsak Pansuai</span>
+        <span>2. Pratchawin Tanyong</span>
+    </div>
+    <small>© 2026 ร้านป๋องทอง ซีฟู้ด (PongThong Seafood) - โครงการจำลองเพื่อการศึกษาวิชา DBT467</small>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="กลับขึ้นด้านบน">↑</button>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // ควบคุมเพลงประกอบ
+    const brandAudio = document.getElementById("brandAudio");
+    const musicToggleBtn = document.getElementById("musicToggleBtn");
+    let isPlaying = false;
+
+    musicToggleBtn.addEventListener("click", function () {
+        if (!isPlaying) {
+            brandAudio.play().then(() => {
+                isPlaying = true;
+                musicToggleBtn.textContent = "⏸ พักเพลงประกอบ";
+                musicToggleBtn.style.background = "#ff595e";
+                musicToggleBtn.style.color = "#fff";
+            }).catch((error) => {
+                console.error("ไม่สามารถเล่นไฟล์เพลงได้:", error);
+                alert("เล่นเพลงไม่ได้ กรุณาตรวจสอบไฟล์ music.mp3.mp3 และลองใหม่อีกครั้ง");
+            });
+        } else {
+            brandAudio.pause();
+            isPlaying = false;
+            musicToggleBtn.textContent = "▶ เปิดเพลงประกอบ";
+            musicToggleBtn.style.background = "#ffb703";
+            musicToggleBtn.style.color = "#023047";
+        }
+    });
+
+    brandAudio.addEventListener("pause", function () {
+        isPlaying = false;
+        musicToggleBtn.textContent = "▶ เปิดเพลงประกอบ";
+        musicToggleBtn.style.background = "#ffb703";
+        musicToggleBtn.style.color = "#023047";
+    });
+
+    brandAudio.addEventListener("play", function () {
+        isPlaying = true;
+        musicToggleBtn.textContent = "⏸ พักเพลงประกอบ";
+        musicToggleBtn.style.background = "#ff595e";
+        musicToggleBtn.style.color = "#fff";
+    });
+
+    // ระบบคำนวณราคาและทดลองสั่งซื้อ
+    const flavorSelect = document.getElementById("flavorSelect");
+    const qtyInput = document.getElementById("qty");
+    const displayPrice = document.getElementById("displayPrice");
+    const liveTotalText = document.getElementById("liveTotalText");
+    const orderBtn = document.getElementById("orderBtn");
+    const orderModal = document.getElementById("orderModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const summaryDetails = document.getElementById("summaryDetails");
+
+    const products = {
+        tomato: { name: "สูตรซอสมะเขือเทศเข้มข้น", price: 119 },
+        chili:  { name: "สูตรซอสมะเขือเทศพริกขี้หนูสวน", price: 129 }
+    };
+
+    function updateProductDisplay() {
+        const product = products[flavorSelect.value];
+        let qty = parseInt(qtyInput.value);
+        if (isNaN(qty) || qty < 1) qty = 1;
+
+        displayPrice.textContent = `฿${product.price} / แพ็ก`;
+        const subtotal = product.price * qty;
+        const shipping = qty >= 3 ? 0 : 35;
+        const total = subtotal + shipping;
+
+        const shippingNote = shipping === 0 
+            ? "ฟรีค่าจัดส่ง!" 
+            : `รวมค่าส่ง ${shipping} บาท (ซื้อครบ 3 แพ็กส่งฟรี)`;
+
+        liveTotalText.textContent = `ยอดประเมินเบื้องต้น: ${total.toLocaleString()} บาท (${shippingNote})`;
+        if (cartCount) cartCount.textContent = qty;
+        if (shippingProgress) {
+            shippingProgress.textContent = qty >= 3
+                ? "🎉 ยอดเยี่ยม! คุณได้รับสิทธิ์จัดส่งฟรีแล้ว"
+                : `เพิ่มอีก ${3 - qty} แพ็ก เพื่อรับสิทธิ์ส่งฟรี 🎁`;
+        }
+    }
+
+    orderBtn.addEventListener("click", function () {
+        const product = products[flavorSelect.value];
+        let qty = parseInt(qtyInput.value);
+        if (isNaN(qty) || qty < 1) { qty = 1; qtyInput.value = 1; }
+
+        const subtotal = product.price * qty;
+        const shipping = qty >= 3 ? 0 : 35;
+        const total = subtotal + shipping;
+        const orderId = "PT-" + Math.floor(100000 + Math.random() * 900000);
+        const now = new Date().toLocaleString("th-TH");
+
+        summaryDetails.innerHTML = `
+            <p><strong>รหัสคำสั่งซื้อจำลอง:</strong> ${orderId}</p>
+            <p><strong>เวลาทำรายการ:</strong> ${now}</p>
+            <p><strong>ผู้สั่งซื้อ (ข้อมูลสมมติ):</strong> คุณสมชาย ใจดี</p>
+            <p><strong>ที่อยู่จัดส่ง:</strong> 123/45 ถ.สุขุมวิท กรุงเทพฯ</p>
+            <hr style="margin: 10px 0; border: 0; border-top: 1px solid #ccc;">
+            <p><strong>สินค้า:</strong> ปลากระป๋องป๋องทอง (${product.name})</p>
+            <p><strong>จำนวน:</strong> ${qty} แพ็ก (แพ็กละ ${product.price} บาท)</p>
+            <p><strong>ค่าจัดส่ง:</strong> ${shipping === 0 ? '<span style="color: green;">ฟรี (โปรโมชันครบ 3 แพ็ก)</span>' : shipping + ' บาท'}</p>
+            <p style="font-size: 1.15rem; color: #c1121f; margin-top: 8px;">
+                <strong>ยอดชำระสุทธิ: ${total.toLocaleString()} บาท</strong>
+            </p>
+        `;
+        orderModal.style.display = "flex";
+    });
+
+    const cartCount = document.getElementById("cartCount");
+    const shippingProgress = document.getElementById("shippingProgress");
+    const qtyMinus = document.getElementById("qtyMinus");
+    const qtyPlus = document.getElementById("qtyPlus");
+    const backToTop = document.getElementById("backToTop");
+
+    qtyMinus.addEventListener("click", () => {
+        qtyInput.value = Math.max(1, (parseInt(qtyInput.value) || 1) - 1);
+        updateProductDisplay();
+    });
+    qtyPlus.addEventListener("click", () => {
+        qtyInput.value = Math.min(50, (parseInt(qtyInput.value) || 1) + 1);
+        updateProductDisplay();
+    });
+    window.addEventListener("scroll", () => {
+        backToTop.classList.toggle("show", window.scrollY > 350);
+    });
+    backToTop.addEventListener("click", () => window.scrollTo({top: 0, behavior: "smooth"}));
+
+    flavorSelect.addEventListener("change", updateProductDisplay);
+    qtyInput.addEventListener("input", updateProductDisplay);
+    closeModalBtn.addEventListener("click", () => orderModal.style.display = "none");
+    window.addEventListener("click", (e) => { if (e.target === orderModal) orderModal.style.display = "none"; });
+
+    updateProductDisplay();
+});
+</script>
+</body>
+</html>
